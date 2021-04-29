@@ -1,112 +1,113 @@
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-  " Smart autocomplete as VSCode
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
-  " Auto Pairs () [] 
-  Plug 'jiangmiao/auto-pairs'
+" Gruvbox-Material Theme
+Plug 'sainnhe/gruvbox-material'
 
-  " A collection of language packs for Vim.
-  Plug 'sheerun/vim-polyglot'  
+" Vim-airline
+Plug 'vim-airline/vim-airline'
 
-  " File system explorer
-  Plug 'preservim/nerdtree'
+" JSX files support
+Plug 'mxw/vim-jsx'
 
-  " Add icons to NERDTree, vir-airline e ect.
-  Plug 'ryanoasis/vim-devicons'
+" TS support
+Plug 'leafgarland/typescript-vim'
 
-  " Add colors to NERDtree Icons
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" JS support
+Plug 'pangloss/vim-javascript'
 
-  " Add lightline
-  Plug 'itchyny/lightline.vim'
+" Nerdtree
+Plug 'preservim/nerdtree'
 
+" Nerdtree syntax highlight
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" Nerdtree dev icons
+Plug 'ryanoasis/vim-devicons'
+
+" He complete the pairs () {} []
+Plug 'jiangmiao/auto-pairs'
+
+" He complete you <3
+Plug 'Valloric/YouCompleteMe'
+
+" Syntax checking
+Plug 'vim-syntastic/syntastic'
+
+" Initialize plugin system
 call plug#end()
-filetype plugin indent on 
 
-" -----------------------------------
+" ===============================================
+" Some configs
+" ===============================================
 
-" Lightline theme
-let g:lightline = {
-  \ 'colorscheme': 'onedark',
-  \ }
-
-" Colors
-let g:onedark_termcolors=256
-
-" Showing br
-set laststatus=2
-
-" Key biddings
-nmap <C-n> :NERDTreeToggle<CR>
-
-nmap <C-s> :w<CR>
-nmap <C-q> :quit<CR>
-
-" Make a new empty tab.
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-t>     <Esc>:tabnew<CR>
-" move to the previous/next tabpage.
-nnoremap <C-j> gT
-nnoremap <C-k> gt
-" Go to last active tab 
-au TabLeave * let g:lasttab = tabpagenr()
-nnoremap <silent> <C-x> :exe "tabn ".g:lasttab<cr>
-vnoremap <silent> <C-x> :EXE "TABN ".G:LASTTAB<CR>
-
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
-nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
-
-" UTF-8
+" Some things
+" Settings encode to UTF-8
 set encoding=UTF-8
-
-" Using Tabs to indent
-set smarttab
-
-set cindent
+" Set to wrap the line
+set wrap
+" Show the numbers
+set nu
+" Put the tab with 2
 set tabstop=2
 set shiftwidth=2
-
-" always uses spaces instead of tab characters
+" Use spaces when pressing <tab> key
 set expandtab
 
-" always put line.
-set number
+" Keybinds
+" map CTRL-E to end-of-line (insert mode)
+imap <C-e> <esc>$i<right>
+" map CTRL-A to beginning-of-line (insert mode)
+imap <C-a> <esc>0i
+" map CTRL-S to save the file
+imap <C-s> <Esc>:w<CR>a
+map <c-s> :w<CR>
+" map CTRL-Q to quit the vim
+map <c-q> :q<CR>
+map <S-q> :q!<CR>
 
-" AutoIndent
-set autoindent
+" typescript-vim
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 
-" Turning search automatically
-set incsearch
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 
-" Cool menu for quit without save
-set confirm
+" gruvbox-material
+set background=dark
 
-"Setting the colorscheme
-colorscheme onedark 
+let g:gruvbox_materia_Background = 'medium'
+colorscheme gruvbox-material
+" YouCompleteMe
+" This will remove the window info on top of file.
+let g:ycm_add_preview_to_completeopt="popup"
 
-" Open NERDTree automatically when vim starts up
-" autocmd vimenter * NERDTree
+" g:ycm_autoclose_preview_window_after_completion=1
+" g:ycm_autoclose_preview_window_after_insertion=1
 
-" Disable unmatched folder and file icons having the same color as their labels
-let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
-let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+" Nerdtree
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
-" Mitigating lag issues
-let g:NERDTreeLimitedSyntax = 1
+let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
-" Vertical Lines
-nnoremap <Leader>H :call<SID>LongLineHLToggle()<cr>
-hi OverLength ctermbg=none cterm=none
-match OverLength /\%>80v/
-fun! s:LongLineHLToggle()
- if !exists('w:longlinehl')
-  let w:longlinehl = matchadd('ErrorMsg', '.\%>80v', 0)
-  echo "Long lines highlighted"
- else
-  call matchdelete(w:longlinehl)
-  unl w:longlinehl
-  echo "Long lines unhighlighted"
- endif
-endfunction
+" Buffer keybindings
+map <C-K> :bnext<CR>
+map <C-J> :bprev<CR>
+map <C-L> :tabn<CR>
+map <C-H> :tabp<CR>
+map <C-D> :bdelete<CR>
+
+
