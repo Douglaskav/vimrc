@@ -36,6 +36,12 @@ Plug 'Valloric/YouCompleteMe'
 " Syntax checking
 Plug 'vim-syntastic/syntastic'
 
+" Emmet.vim
+Plug 'mattn/emmet-vim'
+
+" Vim-commentary
+Plug 'tpope/vim-commentary'
+
 " Initialize plugin system
 call plug#end()
 
@@ -109,5 +115,3 @@ map <C-J> :bprev<CR>
 map <C-L> :tabn<CR>
 map <C-H> :tabp<CR>
 map <C-D> :bdelete<CR>
-
-
