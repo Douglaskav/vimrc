@@ -115,3 +115,8 @@ map <C-J> :bprev<CR>
 map <C-L> :tabn<CR>
 map <C-H> :tabp<CR>
 map <C-D> :bdelete<CR>
+
+" Terminal inside vim
+map <C-m> :term<CR>
+set splitbelow
+set termwinsize=10x0
