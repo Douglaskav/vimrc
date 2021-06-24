@@ -1,9 +1,9 @@
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+  call plug#begin('~/.vim/plugged')
 
-" Gruvbox-Material Theme
+" " Gruvbox-Material Theme
 Plug 'sainnhe/gruvbox-material'
 
 " Vim-airline
@@ -18,6 +18,12 @@ Plug 'leafgarland/typescript-vim'
 " JS support
 Plug 'pangloss/vim-javascript'
 
+" Prettier
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
 " Nerdtree
 Plug 'preservim/nerdtree'
 
@@ -30,17 +36,11 @@ Plug 'ryanoasis/vim-devicons'
 " He complete the pairs () {} []
 Plug 'jiangmiao/auto-pairs'
 
-" He complete you <3
-Plug 'Valloric/YouCompleteMe'
-
-" Syntax checking
-Plug 'vim-syntastic/syntastic'
+" Use release branch (recommend)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Emmet.vim
 Plug 'mattn/emmet-vim'
-
-" Vim-commentary
-Plug 'tpope/vim-commentary'
 
 " Initialize plugin system
 call plug#end()
@@ -48,13 +48,12 @@ call plug#end()
 " ===============================================
 " Some configs
 " ===============================================
-
 " Some things
 " Settings encode to UTF-8
 set encoding=UTF-8
 " Set to wrap the line
 set wrap
-" Show the numbers
+"  Show the numbers
 set nu
 " Put the tab with 2
 set tabstop=2
@@ -80,40 +79,24 @@ let g:typescript_compiler_options = ''
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
-
 " gruvbox-material
 set background=dark
 
 let g:gruvbox_materia_Background = 'medium'
 colorscheme gruvbox-material
-" YouCompleteMe
-" This will remove the window info on top of file.
-let g:ycm_add_preview_to_completeopt="popup"
-
-" g:ycm_autoclose_preview_window_after_completion=1
-" g:ycm_autoclose_preview_window_after_insertion=1
 
 " Nerdtree
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
-let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using
+" exact match
 let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
-
-" Buffer keybindings
+"
+" " Buffer keybindings
 map <C-K> :bnext<CR>
 map <C-J> :bprev<CR>
-map <C-L> :tabn<CR>
-map <C-H> :tabp<CR>
 map <C-D> :bdelete<CR>
 
 " Terminal inside vim
