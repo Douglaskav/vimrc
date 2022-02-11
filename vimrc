@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""               
+$'"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""               
 "               
 "               ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
 "               ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
@@ -88,18 +88,20 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 " automatically enable JavaScript to auto-complete 
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-
-"}}}
-
-" COLORSCHEME{{{
-colorscheme molokai
 "}}}
 
 " PLUGINS ---------------------------------------------------------------- {{{
 
 call plug#begin('~/.vim/plugged')
-
+	
+	" NerdTree File Manager
   Plug 'preservim/nerdtree'
+
+	" Colortheme sonokai
+	Plug 'sainnhe/sonokai'
+
+	" Add syntax suport
+	Plug 'sheerun/vim-polyglot'	
 
 	" post install (yarn install | npm install) then load plugin only for editing supported files
 	Plug 'prettier/vim-prettier', {
@@ -109,6 +111,28 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " }}}
+
+" COLORSCHEME{{{
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 0
+let g:sonokai_diagnostic_line_highlight = 1
+let g:sonokai_current_word = 'bold'
+colorscheme sonokai
+
+if (has("nvim")) "Transparent background. Only for nvim
+    highlight Normal guibg=NONE ctermbg=NONE
+    highlight EndOfBuffer guibg=NONE ctermbg=NONE
+endif
+
+"}}}
 
 " MAPPINGS --------------------------------------------------------------- {{{
 
@@ -156,7 +180,7 @@ nnoremap <A-p> :bprev <CR>
 
 " NERDTree specific mappings.
 " Map the F3 key to toggle NERDTree open and close.
-nnoremap <F3> :NERDTreeToggle<cr>
+nnoremap <C-t> :NERDTreeToggle<cr>
 
 " Ctrl+s to save the file
 nnoremap <silent><c-s> :<c-u>update<cr>"}}}
@@ -203,4 +227,5 @@ let g:prettier#autoformat_require_pragma = 0"}}}}}}
 " NERDTREE{{{
 " Have nerdtree ignore certain files and directories.
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']"}}}
+
 
