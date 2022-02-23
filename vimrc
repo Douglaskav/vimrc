@@ -1,4 +1,4 @@
-$'"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""               
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""               
 "               
 "               ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
 "               ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
@@ -99,6 +99,9 @@ call plug#begin('~/.vim/plugged')
 
 	" Colortheme sonokai
 	Plug 'sainnhe/sonokai'
+	
+	" Statusline airline
+	Plug 'vim-airline/vim-airline'
 
 	" Add syntax suport
 	Plug 'sheerun/vim-polyglot'	
@@ -107,6 +110,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'prettier/vim-prettier', {
   	\ 'do': 'yarn install --frozen-lockfile --production',
   	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
+	Plug 'ap/vim-buftabline'
 
 call plug#end()
 
@@ -120,18 +125,13 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-let g:sonokai_style = 'andromeda'
+let g:sonokai_style = 'default'
 let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 0
 let g:sonokai_diagnostic_line_highlight = 1
 let g:sonokai_current_word = 'bold'
 colorscheme sonokai
-
-if (has("nvim")) "Transparent background. Only for nvim
-    highlight Normal guibg=NONE ctermbg=NONE
-    highlight EndOfBuffer guibg=NONE ctermbg=NONE
-endif
-
+	
 "}}}
 
 " MAPPINGS --------------------------------------------------------------- {{{
@@ -204,28 +204,8 @@ endif
 " }}}
 
 " STATUS LINE {{{
-" Clear status line when vimrc is reloaded.
-set statusline=
-
-" Status line left side.
-set statusline+=\ %F\ %M\ %Y\ %R
-
-" Use a divider to separate the left side from the right side.
-set statusline+=%=
-
-" Status line right side.
-"set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
-
-" Show the status on the second to last line.
-set laststatus=2
 "}}}
 
 " VIM PRETTIER CONFIGS{{{
 let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0"}}}}}}
-
-" NERDTREE{{{
-" Have nerdtree ignore certain files and directories.
-let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']"}}}
-
-
