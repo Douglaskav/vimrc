@@ -95,11 +95,8 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 call plug#begin('~/.vim/plugged')
 	
 	" NerdTree File Manager
-  Plug 'preservim/nerdtree'
+  	Plug 'preservim/nerdtree'
 
-	" Colortheme sonokai
-	Plug 'sainnhe/sonokai'
-	
 	" Statusline airline
 	Plug 'vim-airline/vim-airline'
 
@@ -111,7 +108,11 @@ call plug#begin('~/.vim/plugged')
   	\ 'do': 'yarn install --frozen-lockfile --production',
   	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 
+	" Show open buffers on top screen
 	Plug 'ap/vim-buftabline'
+
+	" Edge colorschme
+	Plug 'joshdick/onedark.vim'	
 
 call plug#end()
 
@@ -125,12 +126,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-let g:sonokai_style = 'default'
-let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 0
-let g:sonokai_diagnostic_line_highlight = 1
-let g:sonokai_current_word = 'bold'
-colorscheme sonokai
+colorscheme onedark 
 	
 "}}}
 
@@ -203,9 +199,8 @@ endif
 
 " }}}
 
-" STATUS LINE {{{
-"}}}
-
 " VIM PRETTIER CONFIGS{{{
 let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0"}}}}}}
+
+let g:NERDTreeWinPos = "right"
