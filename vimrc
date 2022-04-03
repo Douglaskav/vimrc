@@ -114,6 +114,10 @@ call plug#begin('~/.vim/plugged')
 	" Edge colorschme
 	Plug 'joshdick/onedark.vim'	
 
+	" Increment completion
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+
 call plug#end()
 
 " }}}
@@ -135,7 +139,7 @@ colorscheme onedark
 " Type jj to exit insert mode quickly.
 inoremap jj <Esc>
 
-" Press the space bar to type the : character in command mode.
+" Press the space bar totype the : character in command mode.
 nnoremap <space> :
 
 " Pressing the letter o will open a new line below the current one.
@@ -204,3 +208,4 @@ let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0"}}}}}}
 
 let g:NERDTreeWinPos = "right"
+ 
