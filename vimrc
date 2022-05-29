@@ -112,7 +112,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ap/vim-buftabline'
 
 	" Edge colorschme
-	Plug 'joshdick/onedark.vim'	
+	Plug 'morhetz/gruvbox'
 
 	" Increment completion
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -130,7 +130,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-colorscheme onedark 
+colorscheme gruvbox
 	
 "}}}
 
@@ -203,9 +203,4 @@ endif
 
 " }}}
 
-" VIM PRETTIER CONFIGS{{{
-let g:prettier#autoformat = 1
-let g:prettier#autoformat_require_pragma = 0"}}}}}}
-
 let g:NERDTreeWinPos = "right"
- 
