@@ -92,7 +92,7 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
 " PLUGINS ---------------------------------------------------------------- {{{
 
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 	
 	" NerdTree File Manager
   	Plug 'preservim/nerdtree'
@@ -117,6 +117,8 @@ call plug#begin('~/.vim/plugged')
 	" Increment completion
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+	" Install fzf fuzzy files searcher
+	Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -181,6 +183,13 @@ nnoremap <A-p> :bprev <CR>
 " NERDTree specific mappings.
 " Map the F3 key to toggle NERDTree open and close.
 nnoremap <C-t> :NERDTreeToggle<cr>
+
+" Searching files with Fzf
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>h :History<CR>
+nnoremap <Leader>t :BTags<CR>
+nnoremap <Leader>T :Tags<CR>
 
 " Ctrl+s to save the file
 nnoremap <silent><c-s> :<c-u>update<cr>"}}}
